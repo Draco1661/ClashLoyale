@@ -1,43 +1,54 @@
-# Example file showing a circle moving on screen
+# All of this are just example usages of different parts of the game.
 import pygame
 
-# pygame setup
+# Pygame setup
 pygame.init()
-screen = pygame.display.set_mode((1280, 720))
+pygame.mixer.init()
+pygame.font.init()
+
+pygame.display.set_caption("Clash Loyale")
+icon = pygame.image.load("sprites/game_icon.png") # PyInstaller ?
+pygame.display.set_icon(icon)
+
+screen = pygame.display.set_mode((1000,1000))
 clock = pygame.time.Clock()
+
 running = True
 dt = 0
 
-player_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
+# Game variables
+background_color = "#202020"
+text_color = "#EEEEEE"
+green_land_color = "#55D930"
+green_land_alt_color = "#4CC72A"
+path_land_color = "#F8B03C"
+path_land_alt_color = "#E0A036"
+river_color = "#00A8BD"
+
+arena_img = pygame.image.load("sprites/arena.png").convert()
+arena_img_size = arena_img.get_size()
+arena_img = pygame.transform.scale(arena_img, (screen.get_width()/2, screen.get_height()))
+
+font = pygame.font.Font('fonts/YouBlockhead.ttf', 40)
+title_text = font.render('Thomate', True, text_color)
+title_rect = title_text.get_rect()
+
+screen.fill(background_color)
+screen.blit(arena_img, (screen.get_width()/2-arena_img.get_size()[0]/2, 0))
+screen.blit(title_text, title_rect)
+pygame.display.flip()
+
+start_sound = pygame.mixer.Sound("sounds/spawn_hog_rider.mp3")
+start_sound.play()
 
 while running:
-    # poll for events
-    # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill("purple")
+    # pygame.display.flip()
 
-    pygame.draw.circle(screen, "red", player_pos, 40)
-
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_UP]:
-        player_pos.y -= 300 * dt
-    if keys[pygame.K_DOWN]:
-        player_pos.y += 300 * dt
-    if keys[pygame.K_LEFT]:
-        player_pos.x -= 300 * dt
-    if keys[pygame.K_RIGHT]:
-        player_pos.x += 300 * dt
-
-    # flip() the display to put your work on screen
-    pygame.display.flip()
-
-    # limits FPS to 60
-    # dt is delta time in seconds since last frame, used for framerate-
-    # independent physics.
+    # Limits FPS to 60
     dt = clock.tick(60) / 1000
 
 pygame.quit()
