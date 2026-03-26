@@ -84,8 +84,7 @@ try:
 
         # Limits FPS to 60
         delta_time = clock.tick(60) / 1000
-        current time():
-            return delta_time
+        
 
     close_game()
 except pygame.error as e:
