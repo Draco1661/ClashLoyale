@@ -14,5 +14,8 @@
   "target": "None",
   "radius": 0,
   "spawn_unit": "None",
-  "effect": "add_elexir1"
+  "effect": {
+    "add_elexir": 1,
+    "freq_add_elexir": 3
+  }
 }

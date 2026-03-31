@@ -3,7 +3,7 @@
   "elixir_cost": 4,
   "pv": 800,
   "damage": 400,
-  "freq_atk": 1,
+  "freq_atk": 2,
   "speed": 2,
   "type": "unit",
   "range":1,

@@ -17,10 +17,11 @@
     "min_golem",
     "min_golem"
   ],
-  "effect": [
-    "recoil3",
-    "resist-recoil1"
-  ]
+  "effect": {
+    "recoil": 3,
+    "resist-recoil": 2
+  }
+
 
 
 }

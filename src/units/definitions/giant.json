@@ -14,5 +14,7 @@
   "target": "unique",
   "radius": "None",
   "spawn_unit": "None",
-  "effect": "None"
+  "effect": {
+    "resist_recoil": 2
+  }
 }
