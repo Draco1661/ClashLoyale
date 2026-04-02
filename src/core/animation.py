@@ -75,15 +75,15 @@ class Animation:
         # Reprend l’animation
         self.playing = True
 
-    def update(self, td):
+    def update(self, dt):
         """
         Met à jour l’animation
 
-        td = delta time (temps écoulé depuis la dernière frame, en secondes)
+        dt = delta time (temps écoulé depuis la dernière frame, en secondes)
         """
 
         # Applique la vitesse de lecture
-        td *= self.playspeed
+        dt *= self.playspeed
 
         # Réinitialise la liste des frames jouées
         self.played = []
@@ -93,10 +93,10 @@ class Animation:
             return
 
         # Ajoute le temps écoulé au temps total
-        self.playtime += td
+        self.playtime += dt
 
         # Retire le temps écoulé du temps restant
-        self.timeleft -= td
+        self.timeleft -= dt
 
         # Calcule la progression dans la frame actuelle (0 → 1)
         if self.frame_time > 0:

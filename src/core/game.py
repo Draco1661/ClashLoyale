@@ -17,10 +17,12 @@ class Game:
         self.ui = UI()
         self.input = Input(self.state)
         self.sound = Sound()
+
         self.main_menu = MainMenu(self.ui.screen, self.state)
         self.state.screens[GameState.MENU] = self.main_menu
         self.sound.play_music("combat.mp3")
         self.sound.set_volume(1) # LA VALEUR DOIT ETRE ENTRE 0 ET 1
+
         # Add screens here with state definitions
         # Example: self.test_menu = TestMenu(self.ui.screen, self.state)
         #          self.state.screens[GameState.TEST] = self.test_menu
