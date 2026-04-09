@@ -56,6 +56,9 @@ class Sound:
         else:
             pygame.mixer.music.rewind()
             log.logger.send("Rewind current music.", logging.DEBUG)
+            
+    def set_volume(self,volume):
+        pygame.mixer.music.set_volume(volume)
 
     # SFX
     def start_sfx(self, filename):
