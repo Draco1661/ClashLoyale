@@ -1,11 +1,10 @@
 import logging
 import sys
 import traceback
-
 import pygame
 
 from core.game import Game
-from core.sound import Sound
+from units.unit import Unit
 from utils import log
 
 

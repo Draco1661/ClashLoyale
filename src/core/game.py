@@ -1,12 +1,15 @@
+import os
+
 import pygame
 from pygame.event import Event
 
+from constant import DEFINITIONS_PATH
 from core.input import Input
 from core.sound import Sound
 from core.state import StateManager, GameState
 from core.ui import UI
 from levels.main_menu import MainMenu
-from levels.game_screen import GameScreen
+from units.unit import Unit
 from utils import log
 
 
@@ -22,6 +25,13 @@ class Game:
 
         self.main_menu = MainMenu(self.modules)
         self.modules["state"].screens[GameState.MENU] = self.main_menu
+
+        self.registered_units = []
+
+        for definition in os.listdir(DEFINITIONS_PATH):
+            if definition.endswith(".json"):
+                unit = Unit(definition)
+                self.registered_units.append(unit)
 
         # Add screens here with state definitions
         # Example: self.test_menu = TestMenu(self.modules, ...)
