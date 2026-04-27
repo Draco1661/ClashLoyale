@@ -6,7 +6,7 @@ from core.sound import Sound
 from core.state import StateManager, GameState
 from core.ui import UI
 from levels.main_menu import MainMenu
-from levels.game_screen import GameScreen
+from levels.test_screen import TestScreen
 from utils import log
 
 
@@ -17,16 +17,20 @@ class Game:
             "state": StateManager(GameState.MENU),
             "ui": UI(),
             "input": Input(),
-            "sound": Sound()
-        }
+            "sound": Sound(16) # 16 Channels
+        } 
 
         self.main_menu = MainMenu(self.modules)
         self.modules["state"].screens[GameState.MENU] = self.main_menu
+        
+        self.test_menu = TestScreen(self.modules)
+        self.modules["state"].screens[GameState.DECK_SELECTION] = self.test_menu
 
         # Add screens here with state definitions
         # Example: self.test_menu = TestMenu(self.modules, ...)
         #          self.state.screens[GameState.TEST] = self.test_menu
         # For more info on how to create a scene, see test_screen.py
+
         log.logger.send("Initialized game")
 
     def tick(self, events: list[Event], dt):

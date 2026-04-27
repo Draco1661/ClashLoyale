@@ -1,5 +1,6 @@
 import constant
 
+
 class GameScreen:
     def __init__(self, screen, game_state):
         self.screen = screen

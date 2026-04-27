@@ -42,5 +42,5 @@ class Logger:
 
         logger = self
 
-    def send(self, message, severity=logging.INFO):
+    def send(self, message: str, severity=logging.INFO):
         self.logger.log(severity, message, stacklevel=2)
