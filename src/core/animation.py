@@ -1,5 +1,3 @@
-import pygame
-
 ONCE = 0  # Mode de lecture : jouer une seule fois
 
 
