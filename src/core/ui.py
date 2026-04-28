@@ -1,6 +1,7 @@
 import pygame
 
 import constant
+from core import asset
 from utils import log
 
 
@@ -19,9 +20,9 @@ class UI:
         self.icon = pygame.image.load(constant.SPRITES_PATH / "game_icon.png")
         pygame.display.set_icon(self.icon)
 
-        self.font_small = pygame.font.Font(constant.FONTS_PATH / "YouBlockhead.ttf", 24)
-        self.font_medium = pygame.font.Font(constant.FONTS_PATH / "YouBlockhead.ttf", 36)
-        self.font_large = pygame.font.Font(constant.FONTS_PATH / "YouBlockhead.ttf", 76)
+        self.font_small = asset.get_font(constant.FONTS_PATH / "YouBlockhead.ttf", 24)
+        self.font_medium = asset.get_font(constant.FONTS_PATH / "YouBlockhead.ttf", 36)
+        self.font_large = asset.get_font(constant.FONTS_PATH / "YouBlockhead.ttf", 76)
 
         self.components = []
 

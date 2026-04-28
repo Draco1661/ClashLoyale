@@ -2,6 +2,7 @@ import pygame
 
 import constant
 from constant import WIDGETS_PATH
+from core import asset
 from levels.widgets.ButtonWithTipWidget import ButtonWithTipWidget
 from levels.widgets.centered_text_widget import CenteredTextWidget
 
@@ -17,8 +18,7 @@ class MainMenu:
         self.ui = modules["ui"]
         self.sound = modules["sound"]
 
-        # TODO: Centralized image loading system
-        play_sprite = pygame.image.load(WIDGETS_PATH / 'play_icon.png').convert_alpha()
+        play_sprite = asset.get_image(WIDGETS_PATH / 'play_icon.png').convert_alpha()
         play_sprite = pygame.transform.scale(play_sprite, (96, 96))
 
         components = [
@@ -42,7 +42,7 @@ class MainMenu:
         for component in components:
             self.ui.add_component(component)
 
-        self.sound.play_music("deck.mp3")
+        self.sound.play_sound("deck.mp3", 2500, True)
 
     def run(self):
         self.ui.screen.fill(constant.BACKGROUND_COLOR)
