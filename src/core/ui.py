@@ -46,4 +46,3 @@ class UI:
 
     def on_state_change(self):
         self.clear_components()  # Clear the existing components
-        self.screen.fill(constant.BACKGROUND_COLOR)  # Clears the screen

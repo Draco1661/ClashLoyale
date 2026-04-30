@@ -14,7 +14,7 @@ class Game:
     def __init__(self):
         self.running = True
         self.modules = {
-            "state": StateManager(GameState.MENU),
+            "state": StateManager(GameState.STARTING),
             "ui": UI(),
             "input": Input(),
             "sound": Sound(16) # 16 Channels
@@ -30,7 +30,8 @@ class Game:
         # Example: self.test_menu = TestMenu(self.modules, ...)
         #          self.state.screens[GameState.TEST] = self.test_menu
         # For more info on how to create a scene, see test_screen.py
-
+        
+        self.modules["state"].set_state(GameState.MENU)
         log.logger.send("Initialized game")
 
     def tick(self, events: list[Event], dt):
