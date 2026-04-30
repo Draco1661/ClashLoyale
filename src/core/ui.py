@@ -17,7 +17,7 @@ class UI:
         self.caption = "Clash Loyale"
         pygame.display.set_caption(self.caption)
 
-        self.icon = pygame.image.load(constant.SPRITES_PATH / "game_icon.png")
+        self.icon = asset.get_image(constant.SPRITES_PATH / "game_icon.png")
         pygame.display.set_icon(self.icon)
 
         self.font_small = asset.get_font(constant.FONTS_PATH / "YouBlockhead.ttf", 24)
@@ -46,4 +46,3 @@ class UI:
 
     def on_state_change(self):
         self.clear_components()  # Clear the existing components
-        self.screen.fill(constant.BACKGROUND_COLOR)  # Clears the screen
