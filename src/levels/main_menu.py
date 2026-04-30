@@ -7,9 +7,11 @@ from levels.widgets.ButtonWithTipWidget import ButtonWithTipWidget
 from levels.widgets.centered_text_widget import CenteredTextWidget
 
 
-def blank():
+def blank(widget):
     pass
 
+def test_id(widget):
+    print(f"Got ID {widget.id}")
 
 class MainMenu:
     def __init__(self, modules: dict):
@@ -28,14 +30,15 @@ class MainMenu:
                 self.ui.font_medium,
                 (25, self.ui.screen_height - 100),
                 play_sprite,
-                blank
+                lambda widget: blank(widget),
+                id="play_button"
             ),
 
             CenteredTextWidget(
                 modules,
                 "Clash Loyale",
                 self.ui.font_large,
-                (self.ui.screen_width / 2, 30)
+                (self.ui.screen_width / 2, 30),
             )
         ]
 

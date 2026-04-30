@@ -1,10 +1,10 @@
-from typing import Callable
+from typing import Any,Callable
 
 import pygame
 
 
 class ButtonWidget:
-    def __init__(self, modules: dict, pos: tuple, image: pygame.Surface, action: Callable[[], None]):
+    def __init__(self, modules: dict, pos: tuple, image: pygame.Surface, action: Callable[[Any], None], id: str|None = None):
         # Module definitions
         self.screen = modules["ui"].screen
         self.input = modules["input"]
@@ -12,6 +12,9 @@ class ButtonWidget:
         self.pos = pos
         self.button_image = image
         self.action = action
+        self.id = id
+
+        self.action = lambda: action(self) # Passes the object to the action
 
         self.button_image_size = image.get_size()
         self.button_image = pygame.transform.scale(self.button_image,
