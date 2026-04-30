@@ -8,9 +8,11 @@ from levels.widgets.centered_text_widget import CenteredTextWidget
 from levels.scene import Scene
 
 
-def blank():
+def blank(widget):
     pass
 
+def test_id(widget):
+    print(f"Got ID {widget.id}")
 
 class MainMenu(Scene):
     def __init__(self, modules: dict):
@@ -43,7 +45,7 @@ class MainMenu(Scene):
                 self.modules,
                 "Clash Loyale",
                 self.ui.font_large,
-                (self.ui.screen_width / 2, 30)
+                (self.ui.screen_width / 2, 30),
             )
         ]
 

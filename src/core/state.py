@@ -9,6 +9,7 @@ class GameState(IntEnum):
     PAUSED = 4
     END_GAME = 5
     EXIT = 6
+    TEST = 7
 
 
 class StateManager:

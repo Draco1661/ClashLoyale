@@ -1,8 +1,10 @@
+from units.unit import Unit
+
+
 class GameUnit:
     def __init__(self, unit):
-        self.unit = unit  # Toutes les stats sont dedans
-        self.id = id_creator()
-
+        self.unit = unit # Toutes les stats sont dedans
+        self.id=id_creator()
     def deplacement():
         if self.y > 0:
             bestID = redId[0]
@@ -51,3 +53,10 @@ def id_creator():
     global identification
     identification += 1
     return identification
+
+
+
+
+
+
+
