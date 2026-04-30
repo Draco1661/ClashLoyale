@@ -27,8 +27,8 @@ class Game:
         self.main_menu = MainMenu(self.modules)
         self.modules["state"].screens[GameState.MENU] = self.main_menu
         
-        self.test_menu = TestScreen(self.modules)
-        self.modules["state"].screens[GameState.DECK_SELECTION] = self.test_menu
+        self.test_screen = TestScreen(self.modules)
+        self.modules["state"].screens[GameState.TEST] = self.test_screen
 
         self.registered_units = []
 
