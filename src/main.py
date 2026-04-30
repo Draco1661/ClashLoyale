@@ -1,17 +1,16 @@
 import logging
 import sys
 import traceback
-
 import pygame
 
 from core.game import Game
-from core.sound import Sound
+from units.unit import Unit
 from utils import log
 
 
 def run():
     log.Logger('debug.log', logging.DEBUG)  # Will directly populate the logger variable
-    
+
     # Pygame init
     pygame.init()
     pygame.font.init()
@@ -49,4 +48,3 @@ if __name__ == "__main__":
 
         pygame.quit()
         sys.exit(-1)
-
