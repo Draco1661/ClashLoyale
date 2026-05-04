@@ -38,7 +38,7 @@ class MainMenu(Scene):
                 self.ui.font_medium,
                 (25, self.ui.screen_height - 100),
                 play_sprite,
-                lambda: self.state_manager.set_state(GameState.DECK_SELECTION)
+                lambda _: self.state_manager.set_state(GameState.TEST) # TODO: change for deck selection.
             ),
 
             CenteredTextWidget(
