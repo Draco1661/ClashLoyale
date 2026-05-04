@@ -45,6 +45,5 @@ if __name__ == "__main__":
             log.logger.send(clean_line, logging.CRITICAL)
 
         log.logger.send("----------------------------------------------------\n", logging.CRITICAL)
-
         pygame.quit()
         sys.exit(-1)
