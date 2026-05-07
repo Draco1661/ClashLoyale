@@ -2,6 +2,7 @@ from enum import IntEnum
 
 
 class GameState(IntEnum):
+    STARTING = 0
     MENU = 1
     DECK_SELECTION = 2
     GAME = 3
@@ -24,3 +25,4 @@ class StateManager:
 
     def set_state(self, new_state):
         self.state = new_state
+        return self.screens[self.state].start()
