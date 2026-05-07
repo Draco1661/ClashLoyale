@@ -1,22 +1,29 @@
 from typing import Any,Callable
 
 import pygame
+from utils import tracked_surface
 
 
 class ButtonWidget:
-    def __init__(self, modules: dict, pos: tuple, image: pygame.Surface, action: Callable[[Any], None], id: str|None = None):
+    def __init__(self, modules: dict, pos: tuple, image: pygame.Surface | tracked_surface.TrackedSurface, action: Callable[[Any], None], id: str|None = None):
         # Module definitions
         self.screen = modules["ui"].screen
         self.input = modules["input"]
 
         self.pos = pos
-        self.button_image = image
+
+        if type(image) == tracked_surface.TrackedSurface:
+            self.button_image = image.surface
+        else:
+            self.button_image = image
+        
+
         self.action = action
         self.id = id
 
         self.action = lambda: action(self) # Passes the object to the action
 
-        self.button_image_size = image.get_size()
+        self.button_image_size = self.button_image.get_size()
         self.button_image = pygame.transform.scale(self.button_image,
                                                    (self.button_image_size[0], self.button_image_size[1]))
 
