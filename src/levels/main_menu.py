@@ -1,8 +1,9 @@
 import pygame
+import constant
 
-from constant import WIDGETS_PATH
 from core import asset
 from core.state import GameState
+from levels.widgets.button_widget import ButtonWidget
 from levels.widgets.ButtonWithTipWidget import ButtonWithTipWidget
 from levels.widgets.centered_text_widget import CenteredTextWidget
 from levels.scene import Scene
@@ -28,26 +29,21 @@ class MainMenu(Scene):
     def start(self):
         super().start()
 
-        play_sprite = asset.get_image(WIDGETS_PATH / 'play_icon.png').convert_alpha()
+        play_sprite = asset.get_image(constant.WIDGETS_PATH / 'play_icon.png').convert_alpha()
         play_sprite = pygame.transform.scale(play_sprite, (96, 96))
 
         components = [
-            ButtonWithTipWidget(
+            ButtonWidget(
                 self.modules,
-                "Play",
-                self.ui.font_medium,
-                (25, self.ui.screen_height - 100),
+                (35, constant.SCREEN_HEIGHT - 120),
                 play_sprite,
-                lambda _: self.state_manager.set_state(GameState.TEST) # TODO: change for deck selection.
-            ),
-
-            CenteredTextWidget(
-                self.modules,
-                "Clash Loyale",
-                self.ui.font_large,
-                (self.ui.screen_width / 2, 30),
+                lambda _: self.state_manager.set_state(GameState.DECK_SELECTION)
             )
         ]
+
+        self.background_image = asset.get_image(constant.GUI_PATH / "loading_cl.png").convert_alpha()
+        self.background_image = pygame.transform.scale(self.background_image, (constant.SCREEN_WIDTH, constant.SCREEN_HEIGHT))
+        self.ui.screen.blit(self.background_image,(0,0))
 
         for component in components:
             self.ui.add_component(component)
