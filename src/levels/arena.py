@@ -24,7 +24,14 @@ class Arena(Scene):
         self.sound = modules["sound"]
     def start(self):
         super().start()
-        asset.get_image("arena.png")
+        arena = asset.get_image(SPRITES_PATH / "arena.png")
+        components = [
+                image_arena(
+                    arena 
+                    ),
+                ]
+        for component in components:
+            self.ui.add_component(component)
         self.sound.play_sound("combat.mp3", 2500, True)
     def run(self):
         super().run
