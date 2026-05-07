@@ -1,4 +1,6 @@
-ONCE = 0  # Mode de lecture : jouer une seule fois
+import pygame
+
+ONCE = 0
 
 
 class Animation:
@@ -80,58 +82,42 @@ class Animation:
         dt = delta time (temps écoulé depuis la dernière frame, en secondes)
         """
 
-        # Applique la vitesse de lecture
         dt *= self.playspeed
 
-        # Réinitialise la liste des frames jouées
         self.played = []
 
-        # Si pas d’animation ou en pause → on ne fait rien
         if not self.playing or not self.anim:
             return
 
-        # Ajoute le temps écoulé au temps total
         self.playtime += dt
 
-        # Retire le temps écoulé du temps restant
         self.timeleft -= dt
 
-        # Calcule la progression dans la frame actuelle (0 → 1)
         if self.frame_time > 0:
             self.transition = self.timeleft / self.frame_time
 
-        # Si on a dépassé la durée de la frame → avancer
         while self.timeleft <= 0.0:
 
-            # Passe à la frame suivante (boucle)
             self.frame_num = (self.frame_num + 1) % len(self.anim.frames)
 
-            # Si mode "jouer une seule fois" et retour au début → stop
             if self.anim.playmode == ONCE and self.frame_num == 0:
                 self.pause()
                 return
 
-            # Calcule l’index de la prochaine frame
             next_frame = (self.frame_num + 1) % len(self.anim.frames)
 
-            # Récupère la nouvelle frame et sa durée
             frame, time = self.anim.frames[self.frame_num]
 
-            # Met à jour les temps
             self.frame_time = time
             self.timeleft += time
 
-            # Met à jour les images
             self.current = frame
             self.next = self.anim.frames[next_frame][0]
 
-            # Ajoute cette frame à la liste des frames jouées
             self.played.append(frame)
 
-            # Recalcule la transition (progression)
             if time > 0:
                 self.transition = self.timeleft / time
 
-            # Si on revient au début, reset du temps global
             if self.frame_num == 0:
                 self.playtime = self.timeleft
