@@ -3,29 +3,37 @@ import pygame
 import os
 import logging
 
+from utils import tracked_surface
 from core import asset
 from utils import log
 from levels.widgets.button_widget import ButtonWidget
+from levels.scene import Scene
+
+
 deck_blue_selection=[]
 
-
-class ChooseDeckScreen:
+class ChooseDeckScreen(Scene):
     def __init__(self, modules):
-        self.ui = modules["ui"]
+        super().__init__(modules) # Initializes the scene
+
+        self.modules = modules
+        self.ui = self.modules["ui"]
         self.screen = self.ui.screen
-        self.chosen = 0
         self.cartes=[]
 
         self.ready_image = asset.get_image(constant.GUI_PATH / "ready.png").convert_alpha()
-        self.ready_image = pygame.transform.scale(self.ready_image, (self.screen.get_width() / 5.7, self.screen.get_height() / 13))
+        self.ready_image = pygame.transform.scale(self.ready_image, (constant.SCREEN_WIDTH / 5.7, constant.SCREEN_HEIGHT / 13))
+
 
         for file in os.listdir(constant.CARDS_PATH):
             if file.endswith(".png"):
                 image = asset.get_image(constant.CARDS_PATH / file).convert_alpha()
-                image = pygame.transform.scale(image, (self.screen.get_width() / 10.5, self.screen.get_height() / 9))
-                self.cartes.append(image)
+                image = pygame.transform.scale(image, (constant.SCREEN_WIDTH / 10.5, constant.SCREEN_HEIGHT / 9))
+                self.cartes.append(tracked_surface.TrackedSurface(file,image))
+    
 
-        self.screen.fill(constant.BACKGROUND_COLOR)
+    def start(self):
+        super().start()
 
         x=80
         y=200
@@ -35,28 +43,38 @@ class ChooseDeckScreen:
                 y+=130
             
             component = ButtonWidget(
-                modules,
+                self.modules,
                 (x,y),
-                carte,
-                lambda: self.ajout_carte()
+                carte.surface,
+                lambda widget: self.ajout_carte(widget),
+                id=carte.name
             )
             
             self.ui.add_component(component)
 
             x+=120
 
-    def run(self):
         self.screen.blit(self.ready_image, (self.screen.get_width() / 1.5, self.screen.get_width() / 1.2))
-        pass # TODO: PUT HERE AFTER
+
+        self.blue_choose_deck = asset.get_image(constant.GUI_PATH / "blue_choose_deck.png").convert_alpha()
+        self.blue_choose_deck = pygame.transform.scale(self.blue_choose_deck, (constant.SCREEN_WIDTH/1.6, constant.SCREEN_HEIGHT/28))
+        self.ui.screen.blit(self.blue_choose_deck,(85,80))
+
+    def run(self):  
+        super().run()
 
 
-    def ajout_carte(self):
-        if self.chosen==0:
-            self.chosen = 1
-            print("carte add")
-            deck_blue_selection.append("carte")
-        else :
-            self.chosen = 0
+    def ajout_carte(self, widget):
+        if widget.id in deck_blue_selection:
             print("carte pop")
-            del deck_blue_selection[0]
+            del deck_blue_selection[deck_blue_selection.index(widget.id)]
+        else :
+            if len(deck_blue_selection) < 8:
+                print("carte add")
+                deck_blue_selection.append(widget.id)
+            else:
+                print("deck full")
         print(deck_blue_selection)
+    
+    
+
