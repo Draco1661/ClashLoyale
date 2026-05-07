@@ -6,7 +6,7 @@ import pygame
 from core.game import Game
 from units.unit import Unit
 from utils import log
-
+from core.scaling import auto_scaling
 
 def run():
     log.Logger('debug.log', logging.INFO)  # Will directly populate the logger variable
@@ -19,7 +19,7 @@ def run():
     clock = pygame.time.Clock()
 
     log.logger.send("Clash Loyale is ready ! hehehehaw")
-
+    auto_scaling()
     while game.running:
         dt = clock.tick(60) / 1000  # FPS
         events = pygame.event.get()
