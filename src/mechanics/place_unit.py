@@ -3,15 +3,19 @@ import logging
 from utils import log
 
 class Cursor:
+
     def __init__(self,team):#camp=blue or red
         self.x=0
         self.y=0
         self.size=1
         self.color=(255,0,0)
+        self.unit=None
         if team=="blue" or team=="red":
             self.team=team
+            log.logger.send(f"Cursor {self} ", logging.DEBUG)
         else:
             log.logger.send(f"Could not load cursor {self}, camp didn't exist.", logging.ERROR)
+
     def cursor_move(self):
         L = pygame.key.get_pressed()
         L2 = []
@@ -37,6 +41,19 @@ class Cursor:
                     self.y-=1
                 if L2[i] =="K_RIGHT":
                     self.x+=1
+
+    def pick_up_unit(self,unit):
+        self.pick_down_unit()
+        self.unit=unit
+
+
+    def pick_down_unit(self):
+        if self.unit==None:
+            log.logger.send(f"Zero utility,but if you want, why not... ", logging.DEBUG)
+        self.unit=None
+
+    def place_unit(self):
+        pass
 
 
 
