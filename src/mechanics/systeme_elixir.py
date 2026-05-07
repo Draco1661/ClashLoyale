@@ -38,10 +38,4 @@ while game:
     red_elixir = min(red_elixir, MAX_ELIXIR)
     blue_elixir = min(blue_elixir, MAX_ELIXIR)
     
-    #print de debug aze casse pas les couilles
-    print(
-        f"Temps : {game_time:.1f}s | "
-        f"Red : {red_elixir:.2f} | "
-        f"Blue : {blue_elixir:.2f}"
-    )
-
+    
