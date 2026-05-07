@@ -9,7 +9,7 @@ from utils import log
 from core.scaling import auto_scaling
 
 def run():
-    log.Logger('debug.log', logging.DEBUG)  # Will directly populate the logger variable
+    log.Logger('debug.log', logging.INFO)  # Will directly populate the logger variable
 
     # Pygame init
     pygame.init()
@@ -45,6 +45,5 @@ if __name__ == "__main__":
             log.logger.send(clean_line, logging.CRITICAL)
 
         log.logger.send("----------------------------------------------------\n", logging.CRITICAL)
-
         pygame.quit()
         sys.exit(-1)

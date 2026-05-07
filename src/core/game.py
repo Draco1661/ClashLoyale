@@ -10,6 +10,7 @@ from core.state import StateManager, GameState
 from core.ui import UI
 from levels.main_menu import MainMenu
 from levels.test_screen import TestScreen
+from levels.choose_deck_screen import ChooseDeckScreen
 from units.unit import Unit
 from utils import log
 
@@ -26,6 +27,9 @@ class Game:
 
         self.main_menu = MainMenu(self.modules)
         self.modules["state"].screens[GameState.MENU] = self.main_menu
+
+        self.choose_deck_screen = ChooseDeckScreen(self.modules)
+        self.modules["state"].screens[GameState.DECK_SELECTION] = self.choose_deck_screen
         
         self.test_screen = TestScreen(self.modules)
         self.modules["state"].screens[GameState.TEST] = self.test_screen
