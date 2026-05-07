@@ -3,6 +3,7 @@ import pygame
 import os
 import logging
 
+from core.state import GameState
 from utils import tracked_surface
 from core import asset
 from utils import log
@@ -18,6 +19,7 @@ class ChooseDeckScreen(Scene):
 
         self.modules = modules
         self.ui = self.modules["ui"]
+        self.state_manager = self.modules["state"]
         self.screen = self.ui.screen
         self.cartes=[]
 
@@ -37,28 +39,44 @@ class ChooseDeckScreen(Scene):
 
         x=80
         y=200
+        
+        components = [
+            ButtonWidget(
+                self.modules,
+                (self.screen.get_width() / 1.5, self.screen.get_width() / 1.2),
+                self.ready_image,
+                lambda _: self.state_manager.set_state(GameState.MENU)
+            )
+        ]
+
         for carte in self.cartes:
             if x > self.screen.get_width() - 150:
                 x=80
                 y+=130
             
-            component = ButtonWidget(
+            components.append(ButtonWidget(
                 self.modules,
                 (x,y),
                 carte.surface,
                 lambda widget: self.ajout_carte(widget),
                 id=carte.name
-            )
-            
-            self.ui.add_component(component)
+            ))
 
             x+=120
+            
+        for component in components:
+            self.ui.add_component(component)
+        
 
         self.screen.blit(self.ready_image, (self.screen.get_width() / 1.5, self.screen.get_width() / 1.2))
 
         self.blue_choose_deck = asset.get_image(constant.GUI_PATH / "blue_choose_deck.png").convert_alpha()
         self.blue_choose_deck = pygame.transform.scale(self.blue_choose_deck, (constant.SCREEN_WIDTH/1.6, constant.SCREEN_HEIGHT/28))
         self.ui.screen.blit(self.blue_choose_deck,(85,80))
+
+    def full_deck():
+        return len(deck_blue_selection) == 8
+
 
     def run(self):  
         super().run()
