@@ -9,7 +9,7 @@ from utils import log
 from core.scaling import auto_scaling
 
 def run():
-    log.Logger('debug.log', logging.INFO)  # Will directly populate the logger variable
+    log.Logger('debug.log', logging.DEBUG)  # Will directly populate the logger variable
 
     # Pygame init
     pygame.init()
