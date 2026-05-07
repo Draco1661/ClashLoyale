@@ -24,9 +24,9 @@ class ButtonWidget:
         self.action = lambda: action(self) # Passes the object to the action
 
         self.button_image_size = self.button_image.get_size()
-        self.button_image = pygame.transform.scale(self.button_image,
-                                                   (self.button_image_size[0], self.button_image_size[1]))
-
+        #self.button_image = pygame.transform.scale(self.button_image,
+        #                                           (self.button_image_size[0], self.button_image_size[1]))
+        
         self.button_rect = pygame.Rect(self.pos[0],
                                        self.pos[1],
                                        self.button_image_size[0],

@@ -4,7 +4,8 @@ import constant
 from core import asset
 from core.state import GameState
 from levels.widgets.button_widget import ButtonWidget
-from levels.widgets.ButtonWithTipWidget import ButtonWithTipWidget
+from levels.scene import Scene
+from levels.widgets.button_with_tip_widget import ButtonWithTipWidget
 from levels.widgets.centered_text_widget import CenteredTextWidget
 from levels.scene import Scene
 
